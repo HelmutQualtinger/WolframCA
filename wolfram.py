@@ -3,19 +3,21 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import itertools
 import matplotlib.animation as animation
-import numba
+import numba  # just in time compiler only works with python 3.11
 import time
 
 
 # calculate the whole screen
 @numba.njit
 def wolfram_CA(rule_number, size, steps):
-    """_summary_
+    """_Calculate the whole cellular automaton array with the specified rule for the first 
+    steps generations 
+    Dont loop over the cells in Python use numpy vectorization and numba just in time compiler
 
     Args:
-        rule_number (int): the wolfram rule number specifying which neighborhoods give a live cell in the next generation
+        rule_number (int): the wolfram rule number specifying which neighborhoods 
+        give a live cell in the next generation
         size (_int_): _length of the one dimensional universe_
         steps ( int): number of generations remembered
     Returns:
@@ -36,7 +38,8 @@ def wolfram_CA(rule_number, size, steps):
 @numba.njit
 def wolfram_CA_last_line(ca, rule_number, size, steps):
     """_summary_
-    same as wolfram_CA but only calculates the last line
+    same as wolfram_CA but only calculates a new last line for interactive update of the image
+
 
     Args:
         ca ( np two dimensional array): input array, will be shifted up by one line last line will be overwritten with new values
@@ -59,6 +62,8 @@ def wolfram_CA_last_line(ca, rule_number, size, steps):
 @numba.njit
 def color_wolfram_CA(ca):
     """_summary_
+    Colorise the cellular automaton array according to the number of neighbors 
+    to give prettier output
 
     Args:
         ca (ndarry (size,steps) :int8): array of the cellular automaton
@@ -76,7 +81,8 @@ def color_wolfram_CA(ca):
 
 @numba.njit
 def color_wolfram_CA_last_line(ca, cca):
-    """same as color_wolfram_CA but only calculates the last line
+    """same as color_wolfram_CA but only calculates the last line used for interactive 
+    update of the image
 
     Args:
         ca (ndarry (size,steps) :int64): array of the cellular automaton
@@ -89,8 +95,6 @@ def color_wolfram_CA_last_line(ca, cca):
     for i in range(steps-3, steps):
         for j in range(1, size - 1):
             cca[i, j] = np.sum(ca[i-1:i+2, j-1:j+2])
-        # ccan = np.zeros((size), dtype=np.int8)
-        # ccan[1:size-2] = np.sum(ca[i-2:i], axis=0)
     return cca
 
 
