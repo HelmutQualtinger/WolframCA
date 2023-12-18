@@ -133,6 +133,7 @@ def update(frame):
 
 
 # Set the rule number (0 to 255) and other parameters
+
 rule_number = 182
 size = 401
 steps = 200
