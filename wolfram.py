@@ -117,7 +117,7 @@ def update(frame):
     start_time = time.time()
     for i in range(3):   # go 5 generations at a time so that the animation is not too slow
         ca = wolfram_CA_last_line(ca, rule_number, size, steps)
-    # recolorise according to neighbors
+    # recolorize according to neighbors
         cca = color_wolfram_CA_last_line(ca, cca)
 
         generation += 1
