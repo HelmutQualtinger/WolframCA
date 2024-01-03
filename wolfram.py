@@ -115,7 +115,7 @@ def update(frame):
 
     # new generation with last line updated
     start_time = time.time()
-    for i in range(3):   # go 5 generations at a time so that the animation is not too slow
+    for i in range(10):   # go 5 generations at a time so that the animation is not too slow
         ca = wolfram_CA_last_line(ca, rule_number, size, steps)
     # recolorize according to neighbors
         cca = color_wolfram_CA_last_line(ca, cca)
@@ -134,7 +134,7 @@ def update(frame):
 
 # Set the rule number (0 to 255) and other parameters
 
-rule_number = 182
+rule_number = 82
 size = 401
 steps = 200
 generation = 1
@@ -152,5 +152,5 @@ ax.set_axis_off()
 
 # start updating in the background
 ani = animation.FuncAnimation(
-    fig, update, interval=1, cache_frame_data=False)
+    fig, update, interval=10, cache_frame_data=False)
 plt.show()
